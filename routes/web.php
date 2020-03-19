@@ -20,3 +20,7 @@ Route::get('/show/{date}', ['as' => 'day', 'uses' => 'HomeController@day']);
 Route::post('/store', ['as' => 'store', 'uses' => 'HomeController@store']);
 
 
+
+Route::resource('date', 'DateController');
+
+
