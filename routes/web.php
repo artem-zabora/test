@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 //Route::get('/day', ['as' => 'day', 'uses' => 'HomeController@day']);
-Route::get('/show/{date}', ['as' => 'day', 'uses' => 'HomeController@day']);
+Route::get('/show/{date}', ['as' => 'day', 'uses' => 'HomeController@dayShow']);
 Route::post('/store', ['as' => 'store', 'uses' => 'HomeController@store']);
+Route::post('/visitors', ['as' => 'visitors', 'uses' => 'HomeController@showSessions']);
 
 
 

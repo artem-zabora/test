@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Reservation;
-use App\Session;
 use App\Traits\CalendarTrait;
+use App\Traits\SessionTrait;
 
 class HomeController extends Controller
 {
     use CalendarTrait;
+    use SessionTrait;
 
     public function index()
     {
@@ -19,21 +19,15 @@ class HomeController extends Controller
         return view('index', ['data' => $data]);
     }
 
-    public function day($date)
+    public function dayShow($date)
     {
         $date = explode('-', $date);
         $day = array_pop($date);
         $month = array_pop($date);
         $date = $day . '-' . $month;
 
-        $reservations = Reservation::where('date', $date)->get();
-        $sessions = Session::all();
-
-
         $data = [
             'date' => $date,
-            'reservations' => $reservations,
-            'sessions' => $sessions
         ];
 
         return view('date', ['data' => $data]);
@@ -41,8 +35,35 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->input());
+
+        $date = $request->input('date');
+
+        $this->reservationStore($request);
+
+        $sessions = $this->sessionsCalculate($request);
+
+        $data = [
+          'date' => $date,
+          'sessions' => $sessions,
+
+        ];
+
+        return view('date', ['data' => $data]);
+
+
     }
+
+    public function showSessions(Request $request)
+    {
+        $sessions = $this->sessionsCalculate($request);
+        $data = [
+            'date' => $request->input('date'),
+            'sessions' => $sessions
+        ];
+
+        return view('date', ['data' => $data]);
+    }
+
 
 
 }

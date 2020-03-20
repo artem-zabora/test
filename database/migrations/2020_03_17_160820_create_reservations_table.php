@@ -16,7 +16,8 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('date');
-            $table->string('session');
+            $table->bigInteger('session_id')->unsigned();
+            $table->foreign('session_id')->references('id')->on('sessions');
             $table->string('type');
             $table->integer('count');
             $table->timestamps();
