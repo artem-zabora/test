@@ -23,7 +23,7 @@ trait SessionTrait
         if ($reservations->count() > 0){
             foreach($reservations as $reservation){
                 foreach($sessions as $session){
-                    if ($reservation->session_id == $session->id){
+                    if ($reservation->session_id === $session->id){
                         $result[] = ['id' => $session->id, 'session' => $session->session, 'places' => 15 - $reservation->count];
                     }else{
                         $result[] = ['id' => $session->id, 'session' => $session->session, 'places' => 15];

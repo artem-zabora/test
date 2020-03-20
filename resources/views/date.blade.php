@@ -34,18 +34,16 @@
                 <input type="hidden" name="date" value="{{$_POST['date']}}">
                 <table class="table">
                     <tbody>
-                    <tr>
-                        @foreach($data['sessions'] as $session)
-                                <td>
-                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                        <input type="checkbox"  name="id"   value="{{ $session['id'] }}">
-                                        <label class="free"> {{ $session['session'] }}</label>
-                                        <label class="free"> {{ $session['places'] }}</label>
-                                    </div>
-                                </td>
+                        <tr>
+                            @foreach($data['sessions'] as $session)
+                                    <td>
+                                            <input type="checkbox"  name="id"   value="{{ $session['id'] }}">
+                                            <label class="free"> {{ $session['session'] }}</label>
+                                            <label class="free">мест: {{ $session['places'] }}</label>
+                                    </td>
 
-                        @endforeach
-                    </tr>
+                            @endforeach
+                        </tr>
                     </tbody>
                 </table>
                 <button type="submit" class="btn btn-primary">Забронировать</button>
